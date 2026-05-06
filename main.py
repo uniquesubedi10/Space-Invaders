@@ -32,10 +32,9 @@ playerImg=pygame.image.load("spaceshooter.png")
 playerX=370
 playerY=480
 playerX_change=0
-playerY_change=0
 
 def player(x,y):
-    screen.blit(playerImg,(x,y))
+    screen.blit(playerImg,(x,y  ))
 
 enemyImg=[]
 enemyX=[]
@@ -64,7 +63,7 @@ bullet_state="ready"
 #Fire state- Bullet is moving 
 def bulletFire(x,y):
    global bullet_state
-   bullet_state="Fire"
+   bullet_state="fire"
    screen.blit(bulletImg,(x+16,y+10))
 
 def isCollision(enemyX,enemyY,bulletX,bulletY):
@@ -99,7 +98,7 @@ while running:
             if event.key==pygame.K_RIGHT or event.key==pygame.K_d:
              playerX_change=5
             if event.key==pygame.K_SPACE:
-              if bullet_state is "ready":
+              if bullet_state =="ready":
                bullet_sound=mixer.Sound("laser.wav")
                bullet_sound.play()
                #Get the current X-coordinate of the player spaceship 
@@ -109,13 +108,10 @@ while running:
         if event.type==pygame.KEYUP:#Keyup for released event
             if (event.key==pygame.K_RIGHT or event.key==pygame.K_d)or(event.key==pygame.K_LEFT or event.key==pygame.K_a):
               playerX_change=0
-            if (event.key==pygame.K_DOWN or event.key==pygame.K_s) or(event.key==pygame.K_UP or event.key==pygame.K_w):
-              playerY_change=0
          
 
     #Checking boundaries of spaceship so it doesnt go out of bound
     playerX +=playerX_change
-    playerY +=playerY_change
     if playerX<=0:
        playerX=0
     elif playerX>=736:
@@ -157,7 +153,7 @@ while running:
        bulletY=480 
        bullet_state="ready"
     
-    if bullet_state is "Fire":
+    if bullet_state == "fire":
        bulletFire(bulletX,bulletY)
        bulletY-=bulletY_change
 
